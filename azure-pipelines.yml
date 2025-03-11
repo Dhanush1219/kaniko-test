@@ -12,16 +12,17 @@ steps:
       dockerVersion: '20.10.7'
 
   - script: |
-      echo "Installing Kaniko..."
-      curl -LO https://github.com/GoogleContainerTools/kaniko/releases/latest/download/executor
+      echo "Downloading Kaniko executor..."
+      curl -L https://github.com/GoogleContainerTools/kaniko/releases/latest/download/executor -o executor
       chmod +x executor
+      ls -lah executor
     displayName: 'Install Kaniko'
 
   - script: |
       ./executor \
-        --context https://github.com/Dhanush1219/kaniko-test.git \
+        --context https://github.com/your-username/kaniko-test.git \
         --dockerfile Dockerfile \
-        --destination hardikpoc.azurecr.io/kaniko-test:latest \
+        --destination kanikotestacr.azurecr.io/kaniko-test:latest \
         --skip-tls-verify
     env:
       DOCKER_CONFIG: /kaniko/.docker/
