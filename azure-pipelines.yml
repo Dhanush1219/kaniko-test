@@ -13,9 +13,11 @@ steps:
 
   - script: |
       echo "Downloading Kaniko executor..."
-      curl -L https://github.com/GoogleContainerTools/kaniko/releases/latest/download/executor -o executor
+      curl -sSLO https://github.com/GoogleContainerTools/kaniko/releases/latest/download/executor
       chmod +x executor
       ls -lah executor
+      file executor  # Check if it's a valid binary
+      ./executor --help  # Test execution
     displayName: 'Install Kaniko'
 
   - script: |
